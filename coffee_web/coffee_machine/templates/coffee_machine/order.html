@@ -1,0 +1,24 @@
+<!-- coffee_machine/templates/coffee_machine/order.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order {{ drink_name|title }}</title>
+</head>
+<body>
+    <h2>Order a {{ drink_name|title }}</h2>
+    <ul>
+        <li>Water: {{ drink_info.water }} ml</li>
+        <li>Milk: {{ drink_info.milk }} ml</li>
+        <li>Coffee: {{ drink_info.coffee }} g</li>
+        <li>Cost: ${{ drink_info.cost }}</li>
+    </ul>
+
+    <form action="{% url 'make_coffee' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="drink_type" value="{{ drink_name }}">
+        <button type="submit">Confirm Order</button>
+    </form>
+    <a href="{% url 'home' %}">Back to menu</a>
+</body>
+</html>
